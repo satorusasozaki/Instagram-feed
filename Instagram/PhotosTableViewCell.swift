@@ -15,8 +15,8 @@ class PhotosTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        // How to get tableView.rowHeight to make cell height the same size
-        // photoView = UIImageView(frame: CGRectMake(10, 15, self.frame.width, self.frame.height))
+        
+        // Add photoView to this Cell class
         photoView = UIImageView(frame: CGRectMake(0, 0, self.frame.width, 320))
         self.contentView.addSubview(photoView!)
     }
@@ -31,14 +31,9 @@ class PhotosTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-//    func height() -> CGFloat{
-//        return (photoView?.frame.height)!
-//    }
-
+    // Add function to make it easier to set image from URL
     func configureImage(imageURL : NSURL) {
-//        photoView?.setImageWithURL(URL : String?)
-        photoView?.setImageWithUrl(imageURL)
-    
+        photoView?.setImageWithUrl(imageURL)    
     }
 
 }
