@@ -11,13 +11,14 @@ import UIKit
 class PhotosTableViewCell: UITableViewCell {
     
     var photoView : UIImageView?
-    var photoURL : String?
+    var imageURL : NSURL?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         // Add photoView to this Cell class
         photoView = UIImageView(frame: CGRectMake(0, 0, self.frame.width, 320))
+        photoView?.userInteractionEnabled = true
         self.contentView.addSubview(photoView!)
     }
     
@@ -33,7 +34,10 @@ class PhotosTableViewCell: UITableViewCell {
     
     // Add function to make it easier to set image from URL
     func configureImage(imageURL : NSURL) {
+        self.imageURL = imageURL
         photoView?.setImageWithUrl(imageURL)    
     }
+    
+
 
 }

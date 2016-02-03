@@ -8,11 +8,12 @@
 
 import UIKit
 
-class PhotosViewController: UIViewController, UITableViewDataSource {
+class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var jasonDic: NSDictionary?
     var data: NSArray?
     var tableView: UITableView?
+    var imageURL: NSURL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +53,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
         tableView!.rowHeight = 320
         tableView!.registerClass(PhotosTableViewCell.self, forCellReuseIdentifier: "dataCell")
         tableView!.dataSource = self
+        tableView!.delegate = self
         self.view.addSubview(tableView!)
     }
 
@@ -73,14 +75,39 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
         let imageDic = dataDic["images"]
         let standardResolutionDic = imageDic!!["standard_resolution"]
         let urlString = standardResolutionDic!!["url"] as! String
-        let imageUrl : NSURL = NSURL(string: urlString)!
+        imageURL = NSURL(string: urlString)!
 
         // set the image by using the image URL to photoView
-        dataCell.configureImage(imageUrl)
-        return dataCell
+        dataCell.configureImage(imageURL!)
         
+        // set 
+        let tap = UITapGestureRecognizer(target:self, action:"didTapPhotoView:")
+        dataCell.photoView?.addGestureRecognizer(tap)
+        dataCell.photoView?.userInteractionEnabled = true
+        
+        return dataCell
     }
-
-
+    
+    // cellからimageURLを取り出す必要がある
+    // selfに入れるとずれる
+    func didTapPhotoView(recognizer: UIGestureRecognizer) {
+        
+        if (recognizer.state == UIGestureRecognizerState.Ended) {
+            var tapLocation : CGPoint = recognizer.locationInView(self.tableView)
+            var tappedIndexPath : NSIndexPath = self.tableView!.indexPathForRowAtPoint(tapLocation)!
+            var tappedCell = self.tableView?.cellForRowAtIndexPath(tappedIndexPath)
+//            CGPoint tapLocation = [gestureRecognizer locationInView:self.tableView];
+//            NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
+//            UITableViewCell* swipedCell = [self.tableView cellForRowAtIndexPath:swipedIndexPath];
+            // ...
+            tappedCell.photoView.imageURL
+        }
+        let photoDetailsViewController = PhotoDetailsViewController()
+        photoDetailsViewController.imageURL = imageURL
+        self.navigationController?.pushViewController(photoDetailsViewController, animated: true)
+    }
 }
+
+
+
 
