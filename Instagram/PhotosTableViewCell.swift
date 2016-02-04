@@ -8,10 +8,6 @@
 
 import UIKit
 
-//protocol PhotosTableViewCellDelegate {
-//    func cellButtonTapped(cell: PhotosTableViewCell)
-//}
-
 class PhotosTableViewCell: UITableViewCell {
     
     var photoView : UIImageView?
@@ -21,7 +17,8 @@ class PhotosTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         // Add photoView to this Cell class
-        photoView = UIImageView(frame: CGRectMake(0, 0, self.frame.width, 320))
+        // Height and width are set to 375, because I'm testing on iPhone 6
+        photoView = UIImageView(frame: CGRectMake(0, 0, 375, 375))
         photoView?.userInteractionEnabled = true
         self.contentView.addSubview(photoView!)
     }
@@ -32,8 +29,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
+
     }
     
     // Add function to make it easier to set image from URL
