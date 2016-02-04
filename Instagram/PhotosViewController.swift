@@ -81,30 +81,39 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         dataCell.configureImage(imageURL!)
         
         // set 
-        let tap = UITapGestureRecognizer(target:self, action:"didTapPhotoView:")
-        dataCell.photoView?.addGestureRecognizer(tap)
-        dataCell.photoView?.userInteractionEnabled = true
+//        let tap = UITapGestureRecognizer(target:self, action:"didTapPhotoView:")
+//        dataCell.photoView?.addGestureRecognizer(tap)
+//        dataCell.photoView?.userInteractionEnabled = true
         
         return dataCell
     }
     
     // cellからimageURLを取り出す必要がある
     // selfに入れるとずれる
-    func didTapPhotoView(recognizer: UIGestureRecognizer) {
-        
-        if (recognizer.state == UIGestureRecognizerState.Ended) {
-            var tapLocation : CGPoint = recognizer.locationInView(self.tableView)
-            var tappedIndexPath : NSIndexPath = self.tableView!.indexPathForRowAtPoint(tapLocation)!
-            var tappedCell = self.tableView?.cellForRowAtIndexPath(tappedIndexPath)
-//            CGPoint tapLocation = [gestureRecognizer locationInView:self.tableView];
-//            NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-//            UITableViewCell* swipedCell = [self.tableView cellForRowAtIndexPath:swipedIndexPath];
-            // ...
-            tappedCell.photoView.imageURL
-        }
+//    func didTapPhotoView(recognizer: UIGestureRecognizer) {
+//        
+//        if (recognizer.state == UIGestureRecognizerState.Ended) {
+//            var tapLocation : CGPoint = recognizer.locationInView(self.tableView)
+//            var tappedIndexPath : NSIndexPath = self.tableView!.indexPathForRowAtPoint(tapLocation)!
+//            var tappedCell = self.tableView?.cellForRowAtIndexPath(tappedIndexPath)
+////            CGPoint tapLocation = [gestureRecognizer locationInView:self.tableView];
+////            NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
+////            UITableViewCell* swipedCell = [self.tableView cellForRowAtIndexPath:swipedIndexPath];
+//            // ...
+//            tappedCell.photoView.imageURL
+//        }
+//        let photoDetailsViewController = PhotoDetailsViewController()
+//        photoDetailsViewController.imageURL = imageURL
+//        self.navigationController?.pushViewController(photoDetailsViewController, animated: true)
+//    }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let photoDetailsViewController = PhotoDetailsViewController()
-        photoDetailsViewController.imageURL = imageURL
+        var cell = tableView.cellForRowAtIndexPath(indexPath) as! PhotosTableViewCell
+        photoDetailsViewController.imageURL = cell.imageURL
         self.navigationController?.pushViewController(photoDetailsViewController, animated: true)
+        
     }
 }
 

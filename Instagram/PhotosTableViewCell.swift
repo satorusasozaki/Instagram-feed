@@ -8,6 +8,10 @@
 
 import UIKit
 
+//protocol PhotosTableViewCellDelegate {
+//    func cellButtonTapped(cell: PhotosTableViewCell)
+//}
+
 class PhotosTableViewCell: UITableViewCell {
     
     var photoView : UIImageView?
@@ -37,7 +41,4 @@ class PhotosTableViewCell: UITableViewCell {
         self.imageURL = imageURL
         photoView?.setImageWithUrl(imageURL)    
     }
-    
-
-
 }

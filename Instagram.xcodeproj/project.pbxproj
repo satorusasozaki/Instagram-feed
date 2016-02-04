@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6023CBD81C62BEC700A3EE1F /* UIImageView+AFNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6023CBD71C62BEC700A3EE1F /* UIImageView+AFNetworking.swift */; };
 		6050DD081C617698000126E2 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6050DD071C617698000126E2 /* PhotosTableViewCell.swift */; };
 		6050DD0E1C6194BD000126E2 /* AFNetworking-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 6050DD0D1C6194BD000126E2 /* AFNetworking-Bridging-Header.m */; };
-		6050DD101C619A8A000126E2 /* UIImageView+AFNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6050DD0F1C619A8A000126E2 /* UIImageView+AFNetworking.swift */; };
 		6050DD121C619BE5000126E2 /* IMG_5009_Fotor.png in Resources */ = {isa = PBXBuildFile; fileRef = 6050DD111C619BE5000126E2 /* IMG_5009_Fotor.png */; };
 		6077D4F81C61674A005FE373 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6077D4F71C61674A005FE373 /* AppDelegate.swift */; };
 		6077D4FA1C61674A005FE373 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6077D4F91C61674A005FE373 /* PhotosViewController.swift */; };
@@ -21,11 +21,11 @@
 
 /* Begin PBXFileReference section */
 		1BF2023905305AEE94FDE343 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
+		6023CBD71C62BEC700A3EE1F /* UIImageView+AFNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+AFNetworking.swift"; sourceTree = "<group>"; };
 		6050DD071C617698000126E2 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		6050DD0B1C6194BC000126E2 /* Instagram-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instagram-Bridging-Header.h"; sourceTree = "<group>"; };
 		6050DD0C1C6194BD000126E2 /* AFNetworking-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-Bridging-Header.h"; sourceTree = "<group>"; };
 		6050DD0D1C6194BD000126E2 /* AFNetworking-Bridging-Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFNetworking-Bridging-Header.m"; sourceTree = "<group>"; };
-		6050DD0F1C619A8A000126E2 /* UIImageView+AFNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImageView+AFNetworking.swift"; path = "../../../../Downloads/Swift-UIImageView-AFNetworking-master/UIImageView+AFNetworking.swift"; sourceTree = "<group>"; };
 		6050DD111C619BE5000126E2 /* IMG_5009_Fotor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IMG_5009_Fotor.png; path = ../../../IMAGES/IMG_5009_Fotor.png; sourceTree = "<group>"; };
 		6077D4F41C61674A005FE373 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6077D4F71C61674A005FE373 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 				6077D4F91C61674A005FE373 /* PhotosViewController.swift */,
 				608926391C62A1A500FA77FD /* PhotoDetailsViewController.swift */,
 				6050DD071C617698000126E2 /* PhotosTableViewCell.swift */,
-				6050DD0F1C619A8A000126E2 /* UIImageView+AFNetworking.swift */,
+				6023CBD71C62BEC700A3EE1F /* UIImageView+AFNetworking.swift */,
 				6050DD111C619BE5000126E2 /* IMG_5009_Fotor.png */,
 				6050DD0C1C6194BD000126E2 /* AFNetworking-Bridging-Header.h */,
 				6050DD0D1C6194BD000126E2 /* AFNetworking-Bridging-Header.m */,
@@ -229,9 +229,9 @@
 				6050DD081C617698000126E2 /* PhotosTableViewCell.swift in Sources */,
 				6050DD0E1C6194BD000126E2 /* AFNetworking-Bridging-Header.m in Sources */,
 				6089263A1C62A1A500FA77FD /* PhotoDetailsViewController.swift in Sources */,
-				6050DD101C619A8A000126E2 /* UIImageView+AFNetworking.swift in Sources */,
 				6077D4FA1C61674A005FE373 /* PhotosViewController.swift in Sources */,
 				6077D4F81C61674A005FE373 /* AppDelegate.swift in Sources */,
+				6023CBD81C62BEC700A3EE1F /* UIImageView+AFNetworking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
