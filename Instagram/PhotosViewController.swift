@@ -13,7 +13,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     var data: NSMutableArray?  // jason data will be stored here
     var tableView: UITableView?
     var imageURL: NSURL? // set image with this URL to tableViewCell and detailView
-    
+    var refreshControl: UIRefreshControl?
     var isMoreDataLoading = false   // check if need to load data (call API)
     
     override func viewDidLoad() {
@@ -31,42 +31,15 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         self.view.addSubview(tableView!)
         
         // Initialize a UIRefreshControl
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
-        tableView!.insertSubview(refreshControl, atIndex: 0)
-        
-        // API Call
-        let clientId = "e05c462ebd86446ea48a5af73769b602"
-        let url = NSURL(string:"https://api.instagram.com/v1/media/popular?client_id=\(clientId)")
-        let request = NSURLRequest(URL: url!)
-        let session = NSURLSession(
-            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-            delegate:nil,
-            delegateQueue:NSOperationQueue.mainQueue()
-        )
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        tableView!.insertSubview(refreshControl!, atIndex: 0)
         
         // Initialize data array for the later use
         data = NSMutableArray()
         
-        let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
-            completionHandler: { (dataOrNil, response, error) in
-                if let data = dataOrNil {
-                    if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
-                        data, options:[]) as? NSDictionary {
-                            
-                            // array made from jason data is immutable by default even if you assign
-                            // the jason data to mutable array
-                            let bufferArray = responseDictionary["data"]!
-                            self.data = NSMutableArray(array: bufferArray as! [AnyObject])
-                            // this works too ---> self.data = testArray.mutableCopy() as! NSMutableArray
-
-                            // After this block function is finished (API call is finished and the jason data is stored into data array,
-                            // Refresh the tableView so that the content will be displayed
-                            self.tableView?.reloadData()
-                    }
-                }
-        });
-        task.resume()
+        // callAPI for the first time
+        callAPI(1)
     }
 
     // MARK: tableView dataSource
@@ -130,35 +103,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     // MARK: refresh control
     
     func refreshControlAction(refreshControl: UIRefreshControl) {
-        // API Call
-        let clientId = "e05c462ebd86446ea48a5af73769b602"
-        let url = NSURL(string:"https://api.instagram.com/v1/media/popular?client_id=\(clientId)")
-        let request = NSURLRequest(URL: url!)
-        let session = NSURLSession(
-            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-            delegate:nil,
-            delegateQueue:NSOperationQueue.mainQueue()
-        )
-        
-        let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
-            completionHandler: { (dataOrNil, response, error) in
-                if let data = dataOrNil {
-                    if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
-                        data, options:[]) as? NSDictionary {
-                            
-                            // Assign the results from the API Call to data array
-                            
-                            let mustBeMutable : NSMutableArray = responseDictionary["data"]! as! NSMutableArray
-                            self.data = responseDictionary["data"]! as? NSMutableArray
-                            
-                            // After this block function is finished (API call is finished and the jason data is stored into data array,
-                            // Refresh the tableView so that the content will be displayed
-                            self.tableView?.reloadData()
-                            refreshControl.endRefreshing()
-                    }
-                }
-        });
-        task.resume()
+        callAPI(2)
     }
     
     // MARK: infinite scroll
@@ -172,14 +117,15 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
             // When the user has scrolled past the threshold, start requesting
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView!.dragging) {
                 isMoreDataLoading = true
-                loadMoreData()
+                //loadMoreData()
+                callAPI(3)
             }
         }
     }
     
-    // MARK: Load data
-    func loadMoreData() {
-        // API Call
+    // MARK: API call
+    
+    func callAPI (whichCall : Int) {
         let clientId = "e05c462ebd86446ea48a5af73769b602"
         let url = NSURL(string:"https://api.instagram.com/v1/media/popular?client_id=\(clientId)")
         let request = NSURLRequest(URL: url!)
@@ -194,20 +140,34 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                 if let data = dataOrNil {
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
                         data, options:[]) as? NSDictionary {
-//                            
-                            var bufferArray : NSMutableArray = NSMutableArray()
-                            bufferArray = (responseDictionary["data"]! as? NSMutableArray)!
-////                            
-////                            
-////                            self.data += [bufferArray]
-////                            self.data?.addObjectsFromArray([bufferArray])
-//
-                            self.data?.addObjectsFromArray(bufferArray as [AnyObject])
-//                            NSLog("self.date[0] \(self.data![0])")
-//
-//                            
-                            self.isMoreDataLoading = false
-
+                            
+                            // What to do inside here depends on when this function is called
+                            switch whichCall {
+                            // the very first call when viewDidLoad
+                            case 1:
+                                // array made from jason data is immutable by default even if you assign
+                                // the jason data to mutable array
+                                let bufferArray = responseDictionary["data"]!
+                                self.data = NSMutableArray(array: bufferArray as! [AnyObject])
+                                // this works too ---> self.data = testArray.mutableCopy() as! NSMutableArray
+                                
+                            // the call when refresh control is toggled
+                            case 2:
+                                let bufferArray = responseDictionary["data"]!
+                                self.data = NSMutableArray(array: bufferArray as! [AnyObject])
+                                self.refreshControl!.endRefreshing()
+                                
+                            // the call when need to load more data (infinite scroll)
+                            case 3:
+                                var bufferArray : NSMutableArray = NSMutableArray()
+                                bufferArray = (responseDictionary["data"]! as? NSMutableArray)!
+                                self.data?.addObjectsFromArray(bufferArray as [AnyObject])
+                                self.isMoreDataLoading = false
+                                
+                            default:
+                                let bufferArray = responseDictionary["data"]!
+                                self.data = NSMutableArray(array: bufferArray as! [AnyObject])
+                            }
                             self.tableView?.reloadData()
                     }
                 }
