@@ -54,13 +54,11 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
                         data, options:[]) as? NSDictionary {
                             
-                            // Assign the results from the API Call to data array
-                            //  self.data = responseDictionary["data"]! as? NSMutableArray
-                            
-                            let testArray = responseDictionary["data"]!
-                           // self.data = testArray.mutableCopy() as! NSMutableArray
-                            self.data = NSMutableArray(array: testArray as! [AnyObject])
-
+                            // array made from jason data is immutable by default even if you assign
+                            // the jason data to mutable array
+                            let bufferArray = responseDictionary["data"]!
+                            self.data = NSMutableArray(array: bufferArray as! [AnyObject])
+                            // this works too ---> self.data = testArray.mutableCopy() as! NSMutableArray
 
                             // After this block function is finished (API call is finished and the jason data is stored into data array,
                             // Refresh the tableView so that the content will be displayed
