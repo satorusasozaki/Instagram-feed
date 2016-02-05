@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		6023CBD81C62BEC700A3EE1F /* UIImageView+AFNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6023CBD71C62BEC700A3EE1F /* UIImageView+AFNetworking.swift */; };
 		6050DD081C617698000126E2 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6050DD071C617698000126E2 /* PhotosTableViewCell.swift */; };
-		6050DD0E1C6194BD000126E2 /* AFNetworking-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 6050DD0D1C6194BD000126E2 /* AFNetworking-Bridging-Header.m */; };
-		6050DD121C619BE5000126E2 /* IMG_5009_Fotor.png in Resources */ = {isa = PBXBuildFile; fileRef = 6050DD111C619BE5000126E2 /* IMG_5009_Fotor.png */; };
 		6077D4F81C61674A005FE373 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6077D4F71C61674A005FE373 /* AppDelegate.swift */; };
 		6077D4FA1C61674A005FE373 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6077D4F91C61674A005FE373 /* PhotosViewController.swift */; };
 		6077D4FF1C61674A005FE373 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6077D4FE1C61674A005FE373 /* Assets.xcassets */; };
 		6077D5021C61674A005FE373 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6077D5001C61674A005FE373 /* LaunchScreen.storyboard */; };
 		6089263A1C62A1A500FA77FD /* PhotosDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608926391C62A1A500FA77FD /* PhotosDetailsViewController.swift */; };
+		60AC54671C644F72009CBE95 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AC54661C644F72009CBE95 /* PhotoView.swift */; };
+		60AC54691C645358009CBE95 /* CellHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AC54681C645358009CBE95 /* CellHeaderView.swift */; };
 		AF2A099F078729013523AF05 /* libPods-Instagram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F5DF8DF972F87B68A945DE /* libPods-Instagram.a */; };
 /* End PBXBuildFile section */
 
@@ -23,10 +23,6 @@
 		1BF2023905305AEE94FDE343 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 		6023CBD71C62BEC700A3EE1F /* UIImageView+AFNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+AFNetworking.swift"; sourceTree = "<group>"; };
 		6050DD071C617698000126E2 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
-		6050DD0B1C6194BC000126E2 /* Instagram-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instagram-Bridging-Header.h"; sourceTree = "<group>"; };
-		6050DD0C1C6194BD000126E2 /* AFNetworking-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-Bridging-Header.h"; sourceTree = "<group>"; };
-		6050DD0D1C6194BD000126E2 /* AFNetworking-Bridging-Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFNetworking-Bridging-Header.m"; sourceTree = "<group>"; };
-		6050DD111C619BE5000126E2 /* IMG_5009_Fotor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IMG_5009_Fotor.png; path = ../../../IMAGES/IMG_5009_Fotor.png; sourceTree = "<group>"; };
 		6077D4F41C61674A005FE373 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6077D4F71C61674A005FE373 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6077D4F91C61674A005FE373 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +30,8 @@
 		6077D5011C61674A005FE373 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6077D5031C61674A005FE373 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		608926391C62A1A500FA77FD /* PhotosDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosDetailsViewController.swift; sourceTree = "<group>"; };
+		60AC54661C644F72009CBE95 /* PhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		60AC54681C645358009CBE95 /* CellHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellHeaderView.swift; sourceTree = "<group>"; };
 		89F5DF8DF972F87B68A945DE /* libPods-Instagram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Instagram.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7C95EBFB737B84880717A4E /* Pods-Instagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,14 +81,12 @@
 				6077D4F91C61674A005FE373 /* PhotosViewController.swift */,
 				608926391C62A1A500FA77FD /* PhotosDetailsViewController.swift */,
 				6050DD071C617698000126E2 /* PhotosTableViewCell.swift */,
+				60AC54661C644F72009CBE95 /* PhotoView.swift */,
+				60AC54681C645358009CBE95 /* CellHeaderView.swift */,
 				6023CBD71C62BEC700A3EE1F /* UIImageView+AFNetworking.swift */,
-				6050DD111C619BE5000126E2 /* IMG_5009_Fotor.png */,
-				6050DD0C1C6194BD000126E2 /* AFNetworking-Bridging-Header.h */,
-				6050DD0D1C6194BD000126E2 /* AFNetworking-Bridging-Header.m */,
 				6077D4FE1C61674A005FE373 /* Assets.xcassets */,
 				6077D5001C61674A005FE373 /* LaunchScreen.storyboard */,
 				6077D5031C61674A005FE373 /* Info.plist */,
-				6050DD0B1C6194BC000126E2 /* Instagram-Bridging-Header.h */,
 			);
 			path = Instagram;
 			sourceTree = "<group>";
@@ -166,7 +162,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6077D5021C61674A005FE373 /* LaunchScreen.storyboard in Resources */,
-				6050DD121C619BE5000126E2 /* IMG_5009_Fotor.png in Resources */,
 				6077D4FF1C61674A005FE373 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,9 +222,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6050DD081C617698000126E2 /* PhotosTableViewCell.swift in Sources */,
-				6050DD0E1C6194BD000126E2 /* AFNetworking-Bridging-Header.m in Sources */,
 				6089263A1C62A1A500FA77FD /* PhotosDetailsViewController.swift in Sources */,
 				6077D4FA1C61674A005FE373 /* PhotosViewController.swift in Sources */,
+				60AC54691C645358009CBE95 /* CellHeaderView.swift in Sources */,
+				60AC54671C644F72009CBE95 /* PhotoView.swift in Sources */,
 				6077D4F81C61674A005FE373 /* AppDelegate.swift in Sources */,
 				6023CBD81C62BEC700A3EE1F /* UIImageView+AFNetworking.swift in Sources */,
 			);
@@ -343,7 +339,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.satorusasozaki.Instagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Instagram/AFNetworking-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -359,7 +355,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.satorusasozaki.Instagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Instagram/AFNetworking-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

@@ -48,7 +48,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         // Initialize data array for the later use
         data = NSMutableArray()
         
-        
         let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
             completionHandler: { (dataOrNil, response, error) in
                 if let data = dataOrNil {
@@ -61,7 +60,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                             // After this block function is finished (API call is finished and the jason data is stored into data array,
                             // Refresh the tableView so that the content will be displayed
                             self.tableView?.reloadData()
-//                            refreshControl.endRefreshing()
                     }
                 }
         });
@@ -106,35 +104,18 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
-        headerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        let headerView = CellHeaderView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
         
-        let profileView = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
-        profileView.clipsToBounds = true
-        profileView.layer.cornerRadius = 15;
-        profileView.layer.borderColor = UIColor(white: 0.7, alpha: 0.8).CGColor
-        profileView.layer.borderWidth = 1;
-        
-        // get profile picture URL
+        // get user info URL
         let dataDic = data![section]
         let userDic = dataDic["user"]
         let urlString = userDic!!["profile_picture"] as! String
         let profilePicURL = NSURL(string: urlString)!
         
         // set image to profileView
-        profileView.setImageWithUrl(profilePicURL)
-
-        
-        // Use the section number to get the right URL
-        // profileView.setImageWithURL(...)
-        
-        headerView.addSubview(profileView)
-        
-        let userName = UILabel(frame: CGRect(x: 60, y: 10, width: 335, height: 30))
-        userName.font = UIFont(name: "ProximaNova", size: 17)
-        userName.text = userDic!!["username"] as! String
-        
-        headerView.addSubview(userName)
+        headerView.configureProfile(profilePicURL)
+        var name = userDic!!["username"] as! String
+        headerView.configureUserName(name)
         
         return headerView
     }
@@ -189,10 +170,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView!.dragging) {
                 isMoreDataLoading = true
                 loadMoreData()
-
             }
-
-            
         }
     }
     
@@ -232,10 +210,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                 }
         });
         task.resume()
-        
     }
-
-    
 }
 
 

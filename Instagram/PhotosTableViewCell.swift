@@ -10,7 +10,7 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
     
-    var photoView : UIImageView?
+    var photoView : PhotoView?
     var imageURL : NSURL?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -18,8 +18,7 @@ class PhotosTableViewCell: UITableViewCell {
         
         // Add photoView to this Cell class
         // Height and width are set to 375, because I'm testing on iPhone 6
-        photoView = UIImageView(frame: CGRectMake(0, 0, 375, 375))
-        photoView?.userInteractionEnabled = true
+        photoView = PhotoView(frame: CGRectMake(0, 0, 375, 375))
         self.contentView.addSubview(photoView!)
     }
     
