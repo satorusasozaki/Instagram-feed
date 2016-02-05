@@ -8,12 +8,13 @@
 
 import UIKit
 
-class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
-    var jasonDic: NSDictionary?
-    var data: NSArray?
+    var data: NSMutableArray?  // jason data will be stored here
     var tableView: UITableView?
-    var imageURL: NSURL?
+    var imageURL: NSURL? // set image with this URL to tableViewCell and detailView
+    
+    var isMoreDataLoading = false   // check if need to load data (call API)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         )
         
         // Initialize data array for the later use
-        self.data = NSArray()
+        data = NSMutableArray()
         
         
         let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
@@ -55,7 +56,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                         data, options:[]) as? NSDictionary {
                             
                             // Assign the results from the API Call to data array
-                            self.data = responseDictionary["data"]! as? NSArray
+                            self.data = responseDictionary["data"]! as? NSMutableArray
                             
                             // After this block function is finished (API call is finished and the jason data is stored into data array,
                             // Refresh the tableView so that the content will be displayed
@@ -67,6 +68,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         task.resume()
     }
 
+    // MARK: tableView dataSource
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // If data is empty, then nothing will show except tableView row line.
         // If data is filled with jason data
@@ -91,6 +94,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         dataCell.configureImage(imageURL!)
         return dataCell
     }
+    
+    // MARK: tableView delegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let photosDetailsViewController = PhotosDetailsViewController()
@@ -125,7 +130,11 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         
         headerView.addSubview(profileView)
         
-        // Add a UILabel for the username here
+        let userName = UILabel(frame: CGRect(x: 60, y: 10, width: 335, height: 30))
+        userName.font = UIFont(name: "ProximaNova", size: 17)
+        userName.text = userDic!!["username"] as! String
+        
+        headerView.addSubview(userName)
         
         return headerView
     }
@@ -133,6 +142,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
+    
+    // MARK: refresh control
     
     func refreshControlAction(refreshControl: UIRefreshControl) {
         // API Call
@@ -152,7 +163,9 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                         data, options:[]) as? NSDictionary {
                             
                             // Assign the results from the API Call to data array
-                            self.data = responseDictionary["data"]! as? NSArray
+                            
+                            var mustBeMutable : NSMutableArray = responseDictionary["data"]! as! NSMutableArray
+                            self.data = responseDictionary["data"]! as? NSMutableArray
                             
                             // After this block function is finished (API call is finished and the jason data is stored into data array,
                             // Refresh the tableView so that the content will be displayed
@@ -163,6 +176,65 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         });
         task.resume()
     }
+    
+    // MARK: infinite scroll
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView!.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView!.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView!.dragging) {
+                isMoreDataLoading = true
+                loadMoreData()
+
+            }
+
+            
+        }
+    }
+    
+    // MARK: Load data
+    func loadMoreData() {
+        // API Call
+        let clientId = "e05c462ebd86446ea48a5af73769b602"
+        let url = NSURL(string:"https://api.instagram.com/v1/media/popular?client_id=\(clientId)")
+        let request = NSURLRequest(URL: url!)
+        let session = NSURLSession(
+            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+            delegate:nil,
+            delegateQueue:NSOperationQueue.mainQueue()
+        )
+        
+        let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
+            completionHandler: { (dataOrNil, response, error) in
+                if let data = dataOrNil {
+                    if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
+                        data, options:[]) as? NSDictionary {
+//                            
+//                            var bufferArray : NSMutableArray = NSMutableArray()
+//                            bufferArray = (responseDictionary["data"]! as? NSMutableArray)!
+////                            
+////                            
+////        //                    self.data += [bufferArray]
+////                            self.data?.addObjectsFromArray([bufferArray])
+//
+//                            self.data?.addObjectsFromArray(bufferArray as [AnyObject])
+//                            NSLog("self.date[0] \(self.data![0])")
+//
+//                            
+                            self.isMoreDataLoading = false
+
+                            self.tableView?.reloadData()
+                    }
+                }
+        });
+        task.resume()
+        
+    }
+
     
 }
 

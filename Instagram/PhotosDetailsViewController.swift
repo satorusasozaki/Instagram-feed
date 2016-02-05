@@ -8,21 +8,34 @@
 
 import UIKit
 
-class PhotosDetailsViewController : UIViewController {
+class PhotosDetailsViewController : UIViewController, UIScrollViewDelegate {
     
     var imageURL : NSURL?
+    var photoView : UIImageView?
+    var scrollViewForZoom : UIScrollView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // set title
         self.navigationItem.title = "Details"
+        self.view.backgroundColor = UIColor.whiteColor()
         
+        // set UIScrollView for zooming
+        scrollViewForZoom = UIScrollView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+        self.scrollViewForZoom?.minimumZoomScale = 1.0
+        self.scrollViewForZoom?.maximumZoomScale = 6.0
+        scrollViewForZoom?.delegate = self
+        self.view.addSubview(scrollViewForZoom!)
+
         // Configure image
         // Height and width are set to 375, because I'm testing on iPhone 6
-        let photoView = UIImageView(frame: CGRectMake(0, 64, 375, 375))
-        photoView.userInteractionEnabled = true
-        photoView.setImageWithUrl(imageURL!)
-        self.view.addSubview(photoView)
-        
+        photoView = UIImageView(frame: CGRectMake(0, 75, 375, 375))
+        photoView!.setImageWithUrl(imageURL!)
+        self.scrollViewForZoom!.addSubview(photoView!)
+    }
+    
+    // enable zooming
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.photoView
     }
 }
