@@ -35,7 +35,7 @@ extension UIImageView {
                 Static.defaultImageCache!.removeAllObjects()
             }
         })
-        return objc_getAssociatedObject(self, &AssociatedKeys.SharedImageCache) as? AFImageCacheProtocol ?? Static.defaultImageCache!
+        return objc_getAssociatedObject(self, &AssociatedKeys.SharedImageCache) as? AFImageCacheProtocol ?? Static.defaultImageCache!   
     }
     
     private class func af_sharedImageRequestOperationQueue() -> NSOperationQueue {

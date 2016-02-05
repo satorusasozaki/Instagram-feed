@@ -112,7 +112,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         if (!isMoreDataLoading) {
             // Calculate the position of one screen length before the bottom of the results
             let scrollViewContentHeight = tableView!.contentSize.height
-            let scrollOffsetThreshold = scrollViewContentHeight - tableView!.bounds.size.height
+            let scrollOffsetThreshold = scrollViewContentHeight - (tableView!.bounds.size.height) * 2
             
             // When the user has scrolled past the threshold, start requesting
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView!.dragging) {
@@ -149,7 +149,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                                 // the jason data to mutable array
                                 let bufferArray = responseDictionary["data"]!
                                 self.data = NSMutableArray(array: bufferArray as! [AnyObject])
-                                // this works too ---> self.data = testArray.mutableCopy() as! NSMutableArray
+                                // this works too ---> self.data = bufferArray.mutableCopy() as! NSMutableArray
+                                
                                 
                             // the call when refresh control is toggled
                             case 2:

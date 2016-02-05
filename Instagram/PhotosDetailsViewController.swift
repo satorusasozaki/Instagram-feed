@@ -28,8 +28,7 @@ class PhotosDetailsViewController : UIViewController, UIScrollViewDelegate {
         self.view.addSubview(scrollViewForZoom!)
 
         // Configure image
-        // Height and width are set to 375, because I'm testing on iPhone 6
-        photoView = PhotoView(frame: CGRectMake(0, 75, 375, 375))
+        photoView = PhotoView(frame: CGRectMake(0, 75, CGRectGetWidth(self.view.frame), CGRectGetWidth(self.view.frame)))
         photoView!.setImageWithUrl(imageURL!)
         self.scrollViewForZoom!.addSubview(photoView!)
     }
