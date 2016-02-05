@@ -55,8 +55,13 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                         data, options:[]) as? NSDictionary {
                             
                             // Assign the results from the API Call to data array
-                            self.data = responseDictionary["data"]! as? NSMutableArray
+                            //  self.data = responseDictionary["data"]! as? NSMutableArray
                             
+                            let testArray = responseDictionary["data"]!
+                           // self.data = testArray.mutableCopy() as! NSMutableArray
+                            self.data = NSMutableArray(array: testArray as! [AnyObject])
+
+
                             // After this block function is finished (API call is finished and the jason data is stored into data array,
                             // Refresh the tableView so that the content will be displayed
                             self.tableView?.reloadData()
@@ -114,7 +119,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         
         // set image to profileView
         headerView.configureProfile(profilePicURL)
-        var name = userDic!!["username"] as! String
+        let name = userDic!!["username"] as! String
         headerView.configureUserName(name)
         
         return headerView
@@ -145,7 +150,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                             
                             // Assign the results from the API Call to data array
                             
-                            var mustBeMutable : NSMutableArray = responseDictionary["data"]! as! NSMutableArray
+                            let mustBeMutable : NSMutableArray = responseDictionary["data"]! as! NSMutableArray
                             self.data = responseDictionary["data"]! as? NSMutableArray
                             
                             // After this block function is finished (API call is finished and the jason data is stored into data array,
@@ -192,14 +197,14 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
                         data, options:[]) as? NSDictionary {
 //                            
-//                            var bufferArray : NSMutableArray = NSMutableArray()
-//                            bufferArray = (responseDictionary["data"]! as? NSMutableArray)!
+                            var bufferArray : NSMutableArray = NSMutableArray()
+                            bufferArray = (responseDictionary["data"]! as? NSMutableArray)!
 ////                            
 ////                            
-////        //                    self.data += [bufferArray]
+////                            self.data += [bufferArray]
 ////                            self.data?.addObjectsFromArray([bufferArray])
 //
-//                            self.data?.addObjectsFromArray(bufferArray as [AnyObject])
+                            self.data?.addObjectsFromArray(bufferArray as [AnyObject])
 //                            NSLog("self.date[0] \(self.data![0])")
 //
 //                            
